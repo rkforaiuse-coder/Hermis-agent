@@ -1,10 +1,13 @@
 FROM node:20
 
-# आवश्यक टूल्स आणि पॅकेज ग्लोबल इन्स्टॉल करणे
-RUN npm install -g git+https://github.com/NousResearch/Hermes-Agent.git --unsafe-perm
+# वर्क डिरेक्टरी तयार करणे
+WORKDIR /usr/src/app
 
-# Render च्या फ्री सर्व्हरसाठी पोर्ट ओपन करणे
+# अधिकृत पॅकेज थेट npm वरून इन्स्टॉल करणे
+RUN npm install -g @nousresearch/hermes-agent-cli --unsafe-perm
+
+# Render च्या फ्री सर्व्हरला जिवंत ठेवण्यासाठी डमी पोर्ट
 EXPOSE 10000
 
-# ग्लोबल इन्स्टॉलेशनच्या अचूक पाथवरून थेट गेटवे सुरू करणे
-CMD ["/usr/local/bin/hermes", "gateway", "start"]
+# गेटवे थेट सुरू करण्याची अचूक कमांड
+CMD ["hermes", "gateway", "start"]
