@@ -9,5 +9,5 @@ RUN npm install git+https://github.com/NousResearch/Hermes-Agent.git
 # Render च्या फ्री सर्व्हरसाठी पोर्ट ओपन करणे
 EXPOSE 10000
 
-# थेट नोड मॉड्यूल्सच्या बाईनरी पाथवरून गेटवे सुरू करणे
-CMD ["./node_modules/.bin/hermes", "gateway", "start"]
+# नोड मॅनेजरचा (npm) वापर करून थेट पॅकेजमधील स्क्रिप्ट रन करणे
+CMD ["npm", "run", "gateway"]
