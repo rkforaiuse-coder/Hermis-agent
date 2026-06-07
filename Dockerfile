@@ -1,3 +1,10 @@
 FROM node:20
-RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
-CMD ["/root/.hermes/bin/hermes", "gateway", "start"]
+
+# आवश्यक टूल्स इन्स्टॉल करणे
+RUN apt-get update && apt-get install -y curl bash git
+
+# थेट npm वरून अधिकृत hermes-agent CLI इन्स्टॉल करणे (हे Render वर परफेक्ट चालते)
+RUN npm install -g @nousresearch/hermes-agent-cli || true
+
+# बॉट चालू करण्याची कमांड
+CMD ["hermes", "gateway", "start"]
