@@ -1,5 +1,13 @@
-FROM node:20-slim
-RUN apt-get update && apt-get install -y curl bash git python3 make g++ && rm -rf /var/lib/apt/lists/*
-RUN npm install -g git+https://github.com/NousResearch/Hermes-Agent.git --unsafe-perm
+FROM node:20
+
+# वर्क डिरेक्टरी सेट करणे
+WORKDIR /app
+
+# थेट अधिकृत GitHub सोर्सवरून प्रोजेक्ट डिरेक्टरीमध्ये लोकल इन्स्टॉलेशन करणे
+RUN npm install git+https://github.com/NousResearch/Hermes-Agent.git
+
+# Render च्या फ्री सर्व्हरसाठी पोर्ट ओपन करणे
 EXPOSE 10000
-CMD ["hermes", "gateway", "start"]
+
+# लोकल बिन मधील मुख्य कमांड रन करणे
+CMD ["npx", "hermes", "gateway", "start"]
